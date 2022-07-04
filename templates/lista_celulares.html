@@ -7,18 +7,10 @@
         <title>Template</title>
     </head>
     <body>
-        <p>Este es el inicio del registro</p>
         <ul>
-            {% for valor in lista %}
-            <li>linea {{valor}}</li>
+            {% for celular in lista_celulares %}
+            <li>Marca: {{celular.marca}} - Modelo: {{celular.modelo}}</li>  
             {% endfor %}
         </ul>
-        <p>
-            Info de celulares:
-            <u>
-                <li>{{celular.marca}} {{celular.modelo}}</li>
-            </u>
-        </p>
-
     </body>
 </html>

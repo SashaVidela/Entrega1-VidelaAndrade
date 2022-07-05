@@ -1,16 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Template</title>
-    </head>
-    <body>
-        <ul>
-            {% for celular in lista_celulares %}
-            <li>Marca: {{celular.marca}} - Modelo: {{celular.modelo}}</li>  
-            {% endfor %}
-        </ul>
-    </body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Lista de Celulares</title>
+{% endblock title %}
+
+{% block texto_header %}
+<h2>
+    Lista de Celulares
+</h2>
+{% endblock texto_header %}
+
+{% block despues_del_header %}
+<p>
+    <a href={% url 'crear_celular' %}>Crear celular</a>
+</p>
+
+<p>
+    <form action={% url 'lista_celulares' %}>
+        {{form}}
+        <button>Buscar</button>
+    </form>
+</p>
+
+<p>
+    {% if lista_celulares %}
+    <ul>
+        {% for celular in lista_celulares %}
+        <li>{{celular}}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    No se encontraron datos.
+    {% endif %}
+</p>
+{% endblock despues_del_header %}

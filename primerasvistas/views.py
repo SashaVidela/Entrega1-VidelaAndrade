@@ -1,37 +1,52 @@
-
 from django.http import HttpResponse
+from django.template import loader
+from django.shortcuts import redirect, render
+
+from .forms import BusquedaCelulares, FormCelulares
+from .models import Celulares
 from datetime import datetime
 
-from django.template import Template, Context, loader
-from primerasvistas.models import Celulares 
+def prueba(request):
+    return render(request, 'prueba.html')
 
-
-def inicio(request):
-    return HttpResponse('Bienvenido a la pagina')
-
-def ver_fecha(request):
-    fecha_actual = datetime.now()
-    return HttpResponse(f'Fecha actual: {fecha_actual}')
-
-def saludo(request, nombre):
-    return HttpResponse(f'Hola {nombre}')
-
-def mi_template(request, marca_cel, modelo_cel):
+def crear_celular(request):
+       
+    if request.method == 'POST':
+        form = FormCelulares(request.POST)
         
-    template1 = loader.get_template('prueba.html')
+        if form.is_valid():
+            data = form.cleaned_data
+            
+            fecha = data.get('fecha_registro')
+            if not fecha:
+                fecha = datetime.now() 
+            
+            celular = Celulares(
+                marca=data.get('marca'),
+                modelo=data.get('modelo'),
+                fecha_registro=fecha
+            )
+            celular.save()
+
+            return redirect('lista_celulares')
         
-    celular = Celulares(marca = marca_cel, modelo = modelo_cel)
-    celular.save()
+        else:
+            return render(request, 'crear_celular.html', {'form': form})
+            
     
-    render1 = template1.render({'celular': celular})
-   
-    return HttpResponse(render1)
+    form_celular = FormCelulares()
+    
+    return render(request, 'crear_celular.html', {'form': form_celular})
 
 def lista_celulares(request):
     
-    template = loader.get_template('lista_celulares.html')
+    nombre_de_busqueda = request.GET.get('marca')
     
-    lista_celulares = Celulares.objects.all()
+    if nombre_de_busqueda:
+        lista_celulares = Celulares.objects.filter(nombre__icontains=nombre_de_busqueda) 
+    else:
+        lista_celulares = Celulares.objects.all()
     
-    render = template.render({'lista_celulares': lista_celulares})
-    return HttpResponse(render)
+    form = BusquedaCelulares()
+    return render(request, 'lista_celulares.html', {'lista_celulares': lista_celulares, 'form': form})
+    

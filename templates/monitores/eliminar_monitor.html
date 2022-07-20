@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Eliminar Monitores</title>
+{% endblock title %}
+
+{% block texto_header %}
+<h2>
+    Eliminar Monitor
+</h2>
+{% endblock texto_header %}
+
+{% block despues_del_header %}
+<p>
+    <a href={% url 'lista_monitores' %}>Volver</a>
+</p>
+
+<p>
+    <form action={% url 'eliminar_monitor' object.id %} method="post">
+        {% csrf_token %}
+        ¿Quiere eliminar el monitor?
+        <button>Confirmar</button>
+    </form>
+</p>
+
+{% endblock despues_del_header %}

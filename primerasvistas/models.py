@@ -7,4 +7,5 @@ class Celulares(models.Model):
     fecha_registro = models.DateField(null=True)
     
     def __str__(self):
-        return f'En este blog se encuentra información del {self.marca} {self.modelo}'
+        return f'Se encontró información del {self.marca} {self.modelo}'
+    

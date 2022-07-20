@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Monitores</title>
+{% endblock title %}
+
+{% block texto_header %}
+<h2>
+    Monitor
+</h2>
+{% endblock texto_header %}
+
+{% block despues_del_header %}
+<p>
+    <a href={% url 'lista_monitores' %}>Volver</a>
+</p>
+
+
+
+<p>
+    <ul>
+        <li>
+            {{monitor.marca}}
+        </li>
+        <li>
+            {{monitor.modelo}}
+        </li>
+        <li>
+            {{monitor.precio}}
+        </li>
+    </ul>
+</p>
+{% endblock despues_del_header %}

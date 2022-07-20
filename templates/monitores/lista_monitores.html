@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Lista de Monitores</title>
+{% endblock title %}
+
+{% block texto_header %}
+<h2>
+    Lista de Monitores
+</h2>
+{% endblock texto_header %}
+
+{% block despues_del_header %}
+<p>
+    <a href={% url 'crear_monitor' %}>Registrar monitor</a>
+</p>
+
+<p>
+    {% if object_list %}
+    <ul>
+        {% for monitor in object_list %}
+        <li>
+            {{monitor}}
+            <a href={% url 'mostrar_monitor' monitor.id %}>Mostrar</a>
+            <a href={% url 'editar_monitor' monitor.id %}>Editar</a>
+            <a href={% url 'eliminar_monitor' monitor.id %}>Eliminar</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    No se encontraron datos.
+    {% endif %}
+</p>
+{% endblock despues_del_header %}

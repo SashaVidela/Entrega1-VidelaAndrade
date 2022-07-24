@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 
-from .forms import BusquedaCelulares, FormCelulares
+from .forms import FormCelulares
 from .models import Celulares
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
@@ -22,6 +22,7 @@ def crear_celular(request):
             celular = Celulares(
                 marca=data.get('marca'),
                 modelo=data.get('modelo'),
+                descripcion=data.get('descripcion'),
                 fecha_registro=fecha
             )
             celular.save()
@@ -60,6 +61,7 @@ def editar_celular(request, id):
         if form.is_valid():
             celular.marca = form.cleaned_data.get('marca')
             celular.modelo = form.cleaned_data.get('modelo')
+            celular.descripcion = form.cleaned_data.get('descripcion')
             celular.fecha_registro = form.cleaned_data.get('fecha_registro')
             celular.save()
             
@@ -69,7 +71,14 @@ def editar_celular(request, id):
             return render(request, 'celulares/editar_celular.html', {'form': form, 'celular': celular})
     
       
-    form_celular = FormCelulares(initial={'marca': celular.marca, 'modelo': celular.modelo, 'fecha_registro': celular.fecha_registro})
+    form_celular = FormCelulares(
+        initial={
+            'marca': celular.marca,
+            'modelo': celular.modelo,
+            'descripcion': celular.descripcion,
+            'fecha_registro': celular.fecha_registro
+            }
+        )
     
     return render(request, 'celulares/editar_celular.html', {'form': form_celular, 'celular': celular})    
      

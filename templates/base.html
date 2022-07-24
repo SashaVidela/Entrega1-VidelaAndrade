@@ -32,11 +32,16 @@
                 <a class="navbar-brand" href={% url 'lista_celulares' %}>Celulares</a>
                 <a class="navbar-brand" href={% url 'lista_monitores' %}>Monitores</a>
                 {% if request.user.is_authenticated %}
-                <a class="navbar-brand" href='#'>{{request.user.username}}</a>
-                <a class="navbar-brand" href={% url 'logout' %}>Logout</a>
+                <a class="navbar-brand" href= {% url 'perfil' %}>
+                    {% if request.user.masdatos.avatar %}
+                    <img src={{request.user.masdatos.avatar.url}} alt="" height="40px">
+                    {% endif %}
+                    {{request.user.username}}
+                </a>
+                <a class="navbar-brand" href={% url 'logout' %}>Salir</a>
                 {% else %}
-                <a class="navbar-brand" href={% url 'login' %}>Login</a>
-                <a class="navbar-brand" href={% url 'register' %}>Register</a>
+                <a class="navbar-brand" href={% url 'login' %}>Entrar</a>
+                <a class="navbar-brand" href={% url 'register' %}>Registrarse</a>
                 {% endif %}
             </div>
         </nav>

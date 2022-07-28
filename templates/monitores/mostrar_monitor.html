@@ -28,6 +28,12 @@
         <li>
             {{monitor.precio}}
         </li>
+        <li>     
+            <p>Foto</p>   
+            {% if request.user.monitores.avatars %}
+            <img src={{request.user.monitores.avatars.url}} alt="" height="200px">
+            {% endif %}
+        </li> 
     </ul>
 </p>
 {% endblock despues_del_header %}

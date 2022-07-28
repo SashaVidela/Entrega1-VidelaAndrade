@@ -16,6 +16,15 @@
 </p>
 
 <p>
+    <form action= ''method="get">
+        <p>Buscar Monitor</p>
+        <input type = "text" name="marca" id="marca">
+        <input type = "submit" value = "Enviar"> 
+        
+    </form>
+</p>
+
+<p>
     {% if object_list %}
     <ul>
         {% for monitor in object_list %}

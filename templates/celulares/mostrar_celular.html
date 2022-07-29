@@ -25,17 +25,17 @@
         <li>
             {{celular.modelo}}
         </li>
-        <li>
-            {{celular.descripcion | safe}}
-        </li>
-        <li>
-            {{celular.fecha_registro}}
-        </li>
         <li>     
             <p>Foto</p>   
             {% if request.user.celulares.avatars %}
             <img src={{request.user.celulares.avatars.url}} alt="" height="200px">
             {% endif %}
+        </li>
+        <li>
+            {{celular.descripcion | safe}}
+        </li>
+        <li>
+            {{celular.fecha_registro}}
         </li>
     </ul>
 </p>

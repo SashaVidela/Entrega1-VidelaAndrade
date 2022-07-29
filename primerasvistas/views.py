@@ -22,6 +22,7 @@ def crear_celular(request):
             celular = Celulares(
                 marca=data.get('marca'),
                 modelo=data.get('modelo'),
+                avatars=data.get('avatars'),
                 descripcion=data.get('descripcion'),
                 fecha_registro=fecha
             )
@@ -61,9 +62,9 @@ def editar_celular(request, id):
         if form.is_valid():
             celular.marca = form.cleaned_data.get('marca')
             celular.modelo = form.cleaned_data.get('modelo')
+            celular.avatars = form.cleaned_data.get('avatars')
             celular.descripcion = form.cleaned_data.get('descripcion')
             celular.fecha_registro = form.cleaned_data.get('fecha_registro')
-            celular.avatars = form.cleaned_data.get('avatars')
             celular.save()
             
             return redirect('lista_celulares')
@@ -76,9 +77,9 @@ def editar_celular(request, id):
         initial={
             'marca': celular.marca,
             'modelo': celular.modelo,
+            'avatars': celular.avatars,
             'descripcion': celular.descripcion,
             'fecha_registro': celular.fecha_registro,
-            'avatars': celular.avatars
             }
         )
     

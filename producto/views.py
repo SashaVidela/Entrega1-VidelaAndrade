@@ -32,7 +32,7 @@ class CrearMonitor(CreateView):
     model=Monitores
     template_name = 'monitores/crear_monitor.html'
     success_url = '/producto/monitores'
-    fields = ['marca', 'modelo', 'precio']
+    fields = ['marca', 'modelo', 'precio', 'descripcion', 'avatars']
     
     
     

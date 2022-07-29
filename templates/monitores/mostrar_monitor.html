@@ -34,6 +34,9 @@
             <img src={{request.user.monitores.avatars.url}} alt="" height="200px">
             {% endif %}
         </li> 
+        <li>
+            {{monitor.descripcion | safe}}
+        </li>
     </ul>
 </p>
 {% endblock despues_del_header %}

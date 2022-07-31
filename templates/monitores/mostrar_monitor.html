@@ -30,8 +30,8 @@
         </li>
         <li>     
             <p>Foto</p>   
-            {% if request.user.monitores.avatars %}
-            <img src={{request.user.monitores.avatars.url}} alt="" height="200px">
+            {% if request.monitores.avatars %}
+            <img src={{request.monitores.avatars.url}} alt="" height="200px">
             {% endif %}
         </li> 
         <li>

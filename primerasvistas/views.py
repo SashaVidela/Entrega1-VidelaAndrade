@@ -10,7 +10,7 @@ def prueba(request):
 
 def crear_celular(request):
     if request.method == 'POST':
-        form = FormCelulares(request.POST)
+        form = FormCelulares(request.POST, request.FILES)
        
         if form.is_valid():
             data = form.cleaned_data
@@ -41,15 +41,12 @@ def crear_celular(request):
 
 def lista_celulares(request):
                   
-    if request.GET:
-        
+    if request.GET:        
         marcas = request.GET["marca"]
-        buscar = Celulares.objects.filter(marca__icontains=marcas)
-        
+        buscar = Celulares.objects.filter(marca__icontains=marcas)    
     else:
-         
-        buscar = ""
-         
+        buscar = Celulares.objects.all        
+                
     return render(request, 'celulares/lista_celulares.html', {'lista_celulares': buscar})
 
 
@@ -58,7 +55,7 @@ def editar_celular(request, id):
     celular = Celulares.objects.get(id=id)
     
     if request.method == 'POST':
-        form = FormCelulares(request.POST)
+        form = FormCelulares(request.POST, request.FILES)
         if form.is_valid():
             celular.marca = form.cleaned_data.get('marca')
             celular.modelo = form.cleaned_data.get('modelo')

@@ -40,7 +40,7 @@ def editar_monitor(request, id):
     monitor = Monitores.objects.get(id=id)
     
     if request.method == 'POST':
-        form = FormMonitores(request.POST)
+        form = FormMonitores(request.POST, request.FILES)
         if form.is_valid():
             monitor.marca = form.cleaned_data.get('marca')
             monitor.modelo = form.cleaned_data.get('modelo')
